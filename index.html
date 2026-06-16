@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUAPAS | Salón de Belleza & Spa</title>
+    <style>
+        /* Celulares y tablets */
+        @media (max-width: 768px) {
+
+            #inicio {
+                background-image: none !important;
+                background-color: #f8f6f2 !important;
+                min-height: auto;
+                padding-top: 80px;
+                padding-bottom: 80px;
+            }
+
+        }
+    </style>
+    <style>
+        .accordion img {
+            height: 280px;
+            width: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .accordion:hover img {
+            transform: scale(1.05);
+        }
+
+        .accordion {
+
+            background: white;
+
+            border-radius: 20px;
+
+            margin-bottom: 20px;
+
+            overflow: hidden;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+
+        }
+
+        .accordion-btn {
+
+            width: 100%;
+
+            padding: 25px;
+
+            font-size: 22px;
+
+            font-weight: 600;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            background: white;
+
+            cursor: pointer;
+
+            border: none;
+
+        }
+
+        .accordion-content {
+
+            max-height: 0;
+
+            overflow: hidden;
+
+            transition: .4s;
+
+            padding: 0 25px;
+
+        }
+
+        .accordion-content ul {
+
+            padding: 20px 0;
+
+            line-height: 2;
+
+            color: #555;
+
+        }
+
+        .btn-agendar {
+
+            background: #c8a25a;
+
+            color: white;
+
+            padding: 12px 30px;
+
+            border-radius: 50px;
+
+            margin-bottom: 25px;
+
+            border: none;
+
+            cursor: pointer;
+
+        }
+    </style>
+    <!-- Tailwind CSS para diseño moderno y ultra-responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons para iconos estéticos -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        arena: '#F4F0EA',
+                        marfil: '#FAF8F5',
+                        oro: '#C5A059',
+                        orolight: '#E5D5B8',
+                        carbon: '#2C2C2C',
+                        carbonlight: '#4A4A4A'
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+        .font-luxury {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-base {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-marfil text-carbon font-base antialiased">
+
+    <!-- SCRIPT GLOBAL PARA MANEJO DE IMÁGENES ROTAS -->
+    <script>
+        function handleImgError(img, iconName) {
+            img.onerror = null; // Previene bucle infinito
+            const parent = img.parentElement;
+            parent.innerHTML = `
+                <div class="w-full h-full bg-gradient-to-br from-arena via-white to-orolight flex flex-col items-center justify-center p-6 text-center select-none">
+                    <div class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center border border-oro/30 shadow-sm text-oro mb-2">
+                        <i data-lucide="${iconName || 'sparkles'}" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-3xs font-luxury font-bold tracking-widest text-carbon/80 uppercase">${img.alt || 'GUAPAS BEAUTY'}</span>
+                </div>
+            `;
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
+    </script>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <header class="sticky top-0 z-50 bg-marfil/95 backdrop-blur-md border-b border-arena">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center h-16 w-44">
+                    <a href="#inicio" class="flex items-center justify-center w-full h-full">
+                        <img src="logo.jpeg" alt="GUAPAS" class="h-30 w-40 object-contain py-1"
+                            onerror="handleImgError(this, 'crown');">
+                    </a>
+                </div>
+                <!-- Menú Escritorio -->
+                <nav class="hidden md:flex space-x-6 lg:space-x-8 text-sm font-medium tracking-wide">
+                    <a href="#inicio" class="hover:text-oro transition-colors">Inicio</a>
+                    <a href="#nosotros" class="hover:text-oro transition-colors">Nuestro Trabajo</a>
+                    <a href="#servicios" class="hover:text-oro transition-colors">Servicios</a>
+                    <a href="#promociones" class="hover:text-oro transition-colors">Promociones</a>
+                    <a href="#reseñas" class="hover:text-oro transition-colors">Reseñas</a>
+                    <a href="#ubicacion" class="hover:text-oro transition-colors">Ubícanos</a>
+                </nav>
+
+                <!-- Botón de Agendar -->
+                <div class="hidden md:block">
+                    <a href="#agendar"
+                        class="bg-oro hover:bg-carbon hover:text-arena text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest uppercase transition-all duration-300">
+                        Agendar Cita
+                    </a>
+                </div>
+
+                <!-- Botón Menú Móvil -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-carbon hover:text-oro focus:outline-none"
+                        aria-label="Menú">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-marfil border-b border-arena px-4 pt-2 pb-6 space-y-3 shadow-lg">
+            <a href="#inicio" class="block py-2 text-sm font-medium hover:text-oro transition-colors">Inicio</a>
+            <a href="#nosotros" class="block py-2 text-sm font-medium hover:text-oro transition-colors">Nuestro
+                Trabajo</a>
+            <a href="#servicios" class="block py-2 text-sm font-medium hover:text-oro transition-colors">Servicios</a>
+            <a href="#promociones"
+                class="block py-2 text-sm font-medium hover:text-oro transition-colors">Promociones</a>
+            <a href="#reseñas" class="block py-2 text-sm font-medium hover:text-oro transition-colors">Reseñas</a>
+            <a href="#ubicacion" class="block py-2 text-sm font-medium hover:text-oro transition-colors">Ubícanos</a>
+            <div class="pt-2">
+                <a href="#agendar"
+                    class="block text-center bg-oro text-white py-3 rounded-full text-xs font-semibold tracking-widest uppercase">
+                    Agendar Cita
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECCIÓN INICIO (HERO) -->
+    <section id="inicio" class="relative overflow-hidden min-h-screen flex items-center bg-no-repeat" style="
+        background-image: url('5.png');
+        background-size: contain;
+        background-position: center;
+        background-color: #f8f6f2;
+    ">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-r from-arena to-transparent"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <span class="text-oro font-semibold tracking-widest uppercase text-xs md:text-sm block">Bienvenida a
+                        tu espacio de bienestar</span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-luxury text-carbon leading-tight">
+                        En <span class="text-oro italic font-normal">GUAPAS</span> te ofrecemos una experiencia
+                    </h1>
+                    <p class="text-base sm:text-lg text-carbonlight max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Un concepto exclusivo diseñado para resaltar tu belleza natural en Portoviejo. Relájate mientras
+                        nuestro equipo cuida de ti con tratamientos especializados.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#agendar"
+                            class="bg-oro hover:bg-carbon text-white px-8 py-4 rounded-full text-sm font-semibold tracking-widest uppercase transition-all duration-300 shadow-md hover:shadow-lg text-center">
+                            Agendar mi Cita
+                        </a>
+                        <a href="#servicios"
+                            class="border border-oro/40 hover:border-oro text-carbon hover:text-oro px-8 py-4 rounded-full text-sm font-semibold tracking-widest uppercase transition-all duration-300 text-center">
+                            Ver Servicios
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative">
+
+                    <div class="absolute -bottom-4 -left-4 w-24 h-24 border border-oro/30 rounded-full -z-10"></div>
+                    <div class="absolute -top-4 -right-4 w-32 h-32 border border-oro/20 rounded-full -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN CONOCE NUESTRO TRABAJO (FOTOS REALES) -->
+    <section id="nosotros" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-oro font-semibold tracking-widest uppercase text-xs">Calidad & Profesionalismo</span>
+                <h2 class="text-3xl md:text-4xl font-luxury text-carbon">Conoce Nuestro Trabajo</h2>
+                <div class="w-16 h-0.5 bg-oro mx-auto mt-4"></div>
+                <p class="text-carbonlight text-sm md:text-base">
+                    Nuestro equipo de estilistas y expertas apasionadas en acción. Cuidamos cada detalle en un ambiente
+                    higiénico y elegante.
+                </p>
+            </div>
+
+            <!-- Galería de Trabajo con las 4 Imágenes Subidas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Imagen 1: El Equipo (1.jpeg) -->
+                <div
+                    class="group overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-arena bg-marfil">
+                    <div class="relative h-80 overflow-hidden bg-white">
+                        <img src="1.jpeg" alt="Nuestro Equipo de Estilistas"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onerror="handleImgError(this, 'users');">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-luxury text-lg text-carbon font-semibold">Nuestro Equipo</h3>
+                        <p class="text-carbonlight text-xs mt-2 leading-relaxed">
+                            Especialistas comprometidas que brindan una atención cálida utilizando insumos de primer
+                            nivel.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Imagen 2: Planchado / Estilismo (2.jpg) -->
+                <div
+                    class="group overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-arena bg-marfil">
+                    <div class="relative h-80 overflow-hidden bg-white">
+                        <img src="2.jpeg" alt="Alisados y Planchados"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onerror="handleImgError(this, 'scissors');">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-luxury text-lg text-carbon font-semibold">Alisado y Cepillado</h3>
+                        <p class="text-carbonlight text-xs mt-2 leading-relaxed">
+                            Tratamientos y modelados profesionales que respetan la hebra capilar y potencian su brillo
+                            natural.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Imagen 3: Spa Manicure/Pedicure (3.jpeg) -->
+                <div
+                    class="group overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-arena bg-marfil">
+                    <div class="relative h-80 overflow-hidden bg-white">
+                        <img src="3.jpeg" alt="Spa de Manos y Pies"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onerror="handleImgError(this, 'flower2');">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-luxury text-lg text-carbon font-semibold">Manos & Pies Impecables</h3>
+                        <p class="text-carbonlight text-xs mt-2 leading-relaxed">
+                            Consiéntete en nuestras exclusivas poltronas con tratamientos completos de exfoliación y
+                            diseño.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Imagen 4: Tratamiento de Cabello (4.jpeg) -->
+                <div
+                    class="group overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-arena bg-marfil">
+                    <div class="relative h-80 overflow-hidden bg-white">
+                        <img src="4.jpeg" alt="Tratamiento Capilar Profundo"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onerror="handleImgError(this, 'sparkles');">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-luxury text-lg text-carbon font-semibold">Terapia Capilar Experta</h3>
+                        <p class="text-carbonlight text-xs mt-2 leading-relaxed">
+                            Diagnóstico y nutrición intensiva para restaurar y revitalizar cabellos secos o procesados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- SECCIÓN SERVICIOS -->
+    <section id="servicios" class="py-24 bg-marfil">
+
+        <div class="max-w-5xl mx-auto px-6">
+
+            <div class="text-center mb-16">
+
+                <span class="text-oro uppercase tracking-[5px] text-xs font-semibold">
+                    Nuestros servicios
+                </span>
+
+                <h2 class="text-5xl font-luxury text-carbon mt-3">
+                    Todo lo que tenemos para ti
+                </h2>
+
+                <p class="text-carbonlight mt-4 max-w-2xl mx-auto">
+                    Explora cada una de nuestras áreas de belleza y descubre los tratamientos disponibles.
+                </p>
+
+            </div>
+            <!--Reemplaza todo ese bloque por este: -->
+
+            <div class="accordion bg-white rounded-3xl overflow-hidden shadow-lg mb-6">
+
+                <!-- Imagen -->
+                <img src="cabelllo.jpg" alt="Cabello" class="w-full h-56 object-cover">
+
+                <!-- Botón -->
+                <button class="accordion-btn w-full flex justify-between items-center p-6">
+
+                    <span class="text-2xl font-semibold">
+                        💇 Cabello
+                    </span>
+
+                    <span>+</span>
+
+                </button>
+
+                <!-- Contenido -->
+                <div class="accordion-content">
+
+                    <ul class="px-6 pb-4 space-y-2">
+
+                        <li>
+                            <button onclick="bookService('Corte')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Corte
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Coloración')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Coloración
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Balayage')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Balayage
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Alisado')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Alisado
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Keratina')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Keratina
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Botox Capilar')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Botox Capilar
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Hidratación')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Hidratación
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Tratamiento Capilar')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Tratamiento Capilar
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Peinados')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Peinados
+                            </button>
+                        </li>
+                    </ul>
+
+                    <button onclick="bookService('Cabello')" class="btn-agendar">
+
+                        Agendar cita
+
+                    </button>
+
+                </div>
+
+            </div>
+            <!--Reemplaza todo ese bloque por este: -->
+
+            <div class="accordion bg-white rounded-3xl overflow-hidden shadow-lg mb-6">
+
+                <!-- Imagen -->
+                <img src="uñas.jpg" alt="Uñas" class="w-full h-56 object-cover">
+
+                <!-- Botón -->
+                <button class="accordion-btn w-full flex justify-between items-center p-6">
+
+                    <span class="text-2xl font-semibold">
+                        💅 Uñas
+                    </span>
+
+                    <span>+</span>
+
+                </button>
+
+                <!-- Contenido -->
+                <div class="accordion-content">
+
+                    <ul class="px-6 pb-4 space-y-2">
+                        <li>
+                            <button onclick="bookService('Soft Gel')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Soft Gel
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Rubber Gel')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Rubber Gel
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Builder Gel')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Builder Gel
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Gelish')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Gelish
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Acrílicas')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Acrílicas
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Polygel')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Polygel
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Esculpidas')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Esculpidas
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Kapping')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Kapping
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Francesa')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Francesa
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Decoración')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Decoración
+                            </button>
+                        </li>
+
+                    </ul>
+
+                    <button onclick="bookService('Uñas')" class="btn-agendar">
+
+                        Agendar cita
+
+                    </button>
+
+                </div>
+
+            </div>
+            <!--Reemplaza todo ese bloque por este: -->
+
+            <div class="accordion bg-white rounded-3xl overflow-hidden shadow-lg mb-6">
+
+                <!-- Imagen -->
+                <img src="pedicure.jpg" alt="Pedicure" class="w-full h-56 object-cover">
+
+                <!-- Botón -->
+                <button class="accordion-btn w-full flex justify-between items-center p-6">
+
+                    <span class="text-2xl font-semibold">
+                        🦶 Pedicure
+                    </span>
+
+                    <span>+</span>
+
+                </button>
+
+                <!-- Contenido -->
+                <div class="accordion-content">
+
+                    <ul class="px-6 pb-4 space-y-2">
+                        <li>
+                            <button onclick="bookService('Pedicure Spa')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Pedicure Spa
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Pedicure Tradicional')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Pedicure Tradicional
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Gel en pies')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Gel en pies
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Exfoliación')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Exfoliación
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Hidratación')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Hidratación
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Decoración')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Decoración
+                            </button>
+                        </li>
+                    </ul>
+
+                    <button onclick="bookService('Pedicure')" class="btn-agendar">
+
+                        Agendar cita
+
+                    </button>
+
+                </div>
+
+            </div>
+            <!--Reemplaza todo ese bloque por este: -->
+
+            <div class="accordion bg-white rounded-3xl overflow-hidden shadow-lg mb-6">
+
+                <!-- Imagen -->
+                <img src="pestañas.jpg" alt="Pestañas" class="w-full h-56 object-cover">
+
+                <!-- Botón -->
+                <button class="accordion-btn w-full flex justify-between items-center p-6">
+
+                    <span class="text-2xl font-semibold">
+                        👁️ Pestañas
+                    </span>
+
+                    <span>+</span>
+
+                </button>
+
+                <!-- Contenido -->
+                <div class="accordion-content">
+
+                    <ul class="px-6 pb-4 space-y-2">
+                        <li>
+                            <button onclick="bookService('Clásicas')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Clásicas
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Híbridas')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Híbridas
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Volumen Ruso')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Volumen Ruso
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Volumen Griego')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Volumen Griego
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Efecto Natural')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Efecto Natural
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Efecto Fox')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Efecto Fox
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Retiro')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Retiro
+                            </button>
+                        </li>
+
+                    </ul>
+
+                    <button onclick="bookService('Pestañas')" class="btn-agendar">
+
+                        Agendar cita
+
+                    </button>
+
+                </div>
+
+            </div>
+            <!--Reemplaza todo ese bloque por este: -->
+
+            <div class="accordion bg-white rounded-3xl overflow-hidden shadow-lg mb-6">
+
+                <!-- Imagen -->
+                <img src="cejas.jpg" alt="Cejas" class="w-full h-56 object-cover">
+
+                <!-- Botón -->
+                <button class="accordion-btn w-full flex justify-between items-center p-6">
+
+                    <span class="text-2xl font-semibold">
+                        🌸 Cejas
+                    </span>
+
+                    <span>+</span>
+
+                </button>
+
+                <!-- Contenido -->
+                <div class="accordion-content">
+
+                    <ul class="px-6 pb-4 space-y-2">
+
+                        <li>
+                            <button onclick="bookService('Laminado')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Laminado
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Diseño')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Diseño
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Perfilado')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Perfilado
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Tinte')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Tinte
+                            </button>
+                        </li>
+
+                        <li>
+                            <button onclick="bookService('Depilación')"
+                                class="text-left hover:text-amber-600 transition-colors">
+                                • Depilación
+                            </button>
+                        </li>
+                    </ul>
+
+                    <button onclick="bookService('Cejas')" class="btn-agendar">
+
+                        Agendar cita
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- SECCIÓN PROMOCIONES (CON 10 IMÁGENES REALES CATEGORIZADAS) --> ///
+
+    <section id="promociones" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                <span class="text-oro font-semibold tracking-widest uppercase text-xs">Descuentos & Paquetes</span>
+                <h2 class="text-3xl md:text-4xl font-luxury text-carbon">Promociones del Mes</h2>
+                <div class="w-16 h-0.5 bg-oro mx-auto mt-4"></div>
+                <p class="text-carbonlight text-sm md:text-base">
+                    Tratamientos exclusivos diseñados para que luzcas radiante sin salir de tu presupuesto.
+                </p>
+            </div>
+
+            <!-- Botones Filtros de Categorías para Promociones -->
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-16">
+                <button onclick="filterPromos('all')" id="btn-all"
+                    class="promo-filter-btn px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 bg-oro text-white shadow-sm">
+                    ✨ Todas las promociones
+                </button>
+                <button onclick="filterPromos('cabello')" id="btn-cabello"
+                    class="promo-filter-btn px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 bg-arena/50 text-carbon hover:bg-arena">
+                    💇‍♀️ Cabello
+                </button>
+                <button onclick="filterPromos('unas')" id="btn-unas"
+                    class="promo-filter-btn px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 bg-arena/50 text-carbon hover:bg-arena">
+                    💅 Uñas
+                </button>
+                <button onclick="filterPromos('mirada')" id="btn-mirada"
+                    class="promo-filter-btn px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 bg-arena/50 text-carbon hover:bg-arena">
+                    👁️ pestañas y cejas
+                </button>
+            </div>
+
+            <!-- Grilla de Promociones -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="promos-grid">
+
+                <!-- === CATEGORÍA: CABELLO (4 PROMOS) === -->
+                <!-- Promo 1 -->
+                <div
+                    class="promo-card filter-cabello bg-marfil border border-arena rounded-3xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="h-64 relative overflow-hidden bg-white">
+                        <img src="promo6.jpeg" alt="Alisado Orgánico" class="w-full h-full object-cover"
+                            onerror="handleImgError(this, 'sparkles');">
+                        <span
+                            class="absolute top-4 right-4 bg-oro text-white px-3.5 py-1.5 rounded-full text-2xs font-bold tracking-wider uppercase">
+                            Beneficios
+                        </span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-2xs text-oro font-bold uppercase tracking-widest">Cabello</span>
+                            <h3 class="text-xl font-luxury text-carbon mt-1">PROMO KERABOTOX</h3>
+                            <p class="text-xs text-carbonlight mt-2 leading-relaxed">
+                                Alisado progresivo que nutre, sella puntas y elimina el frizz para un cabello.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-arena/60 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-oro">$50.00</span>
+                            </div>
+                            <button onclick="bookPromo('Kerabotox')"
+                                class="bg-carbon hover:bg-oro text-white px-4 py-2.5 rounded-full text-3xs font-semibold uppercase tracking-wider transition-all">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo 2 -->
+                <div
+                    class="promo-card filter-cabello bg-marfil border border-arena rounded-3xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="h-64 relative overflow-hidden bg-white">
+                        <img src="promo7.jpeg" alt="Protección Térmica" class="w-full h-full object-cover"
+                            onerror="handleImgError(this, 'flower2');">
+                        <span
+                            class="absolute top-4 right-4 bg-oro text-white px-3.5 py-1.5 rounded-full text-2xs font-bold tracking-wider uppercase">
+                            Especial
+                        </span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-2xs text-oro font-bold uppercase tracking-widest">Cabello</span>
+                            <h3 class="text-xl font-luxury text-carbon mt-1">PROMO ANTIFRIZZ</h3>
+                            <p class="text-xs text-carbonlight mt-2 leading-relaxed">
+                                Elimina el frizz y da brillo a tu cabello con nuestro tratamiento especial.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-arena/60 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-oro">$30.00</span>
+                            </div>
+                            <button onclick="bookPromo('Promo Antifrizz')"
+                                class="bg-carbon hover:bg-oro text-white px-4 py-2.5 rounded-full text-3xs font-semibold uppercase tracking-wider transition-all">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo 3 -->
+                <div
+                    class="promo-card filter-cabello bg-marfil border border-arena rounded-3xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="h-64 relative overflow-hidden bg-white">
+                        <img src="promo5.jpeg" alt="Botox Capilar" class="w-full h-full object-cover"
+                            onerror="handleImgError(this, 'scissors');">
+                        <span
+                            class="absolute top-4 right-4 bg-oro text-white px-3.5 py-1.5 rounded-full text-2xs font-bold tracking-wider uppercase">
+                            Nutrición
+                        </span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-2xs text-oro font-bold uppercase tracking-widest">Cabello</span>
+                            <h3 class="text-xl font-luxury text-carbon mt-1">PROMO CAPILAR</h3>
+                            <p class="text-xs text-carbonlight mt-2 leading-relaxed">
+                                Hidratación, Repolarización y botox nutritivo para restaurar la salud y brillo de tu
+                                cabello.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-arena/60 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-oro">$25.00</span>
+                            </div>
+                            <button onclick="bookPromo('Promo Capilar mas detox')"
+                                class="bg-carbon hover:bg-oro text-white px-4 py-2.5 rounded-full text-3xs font-semibold uppercase tracking-wider transition-all">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo 4 -->
+                <div
+                    class="promo-card filter-cabello bg-marfil border border-arena rounded-3xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="h-64 relative overflow-hidden bg-white">
+                        <img src="promo4.jpeg" alt="Alisado progresivo" class="w-full h-full object-cover"
+                            onerror="handleImgError(this, 'sparkles');">
+                        <span
+                            class="absolute top-4 right-4 bg-oro text-white px-3.5 py-1.5 rounded-full text-2xs font-bold tracking-wider uppercase">
+                            Cortes de temporada
+                        </span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-2xs text-oro font-bold uppercase tracking-widest">Cabello</span>
+                            <h3 class="text-xl font-luxury text-carbon mt-1">PROMO CORTES</h3>
+                            <p class="text-xs text-carbonlight mt-2 leading-relaxed">
+                                Un cambio de look espectacular, con lo ultimo en cortes de temporada para renovar tu
+                                estilo.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-arena/60 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-oro">$10.00</span>
+                            </div>
+                            <button onclick="bookPromo('Promo Cortes')"
+                                class="bg-carbon hover:bg-oro text-white px-4 py-2.5 rounded-full text-3xs font-semibold uppercase tracking-wider transition-all">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- === CATEGORÍA: UÑAS (3 PROMOS) === -->
+                <!-- Promo 5 -->
+                <div
+                    class="promo-card filter-unas bg-marfil border border-arena rounded-3xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="h-64 relative overflow-hidden bg-white">
+                        <img src="promo9.jpeg" alt="Combo Manicure Pedicure" class="w-full h-full object-cover"
+                            onerror="handleImgError(this, 'flower2');">
+                        <span
+                            class="absolute top-4 right-4 bg-oro text-white px-3.5 py-1.5 rounded-full text-2xs font-bold tracking-wider uppercase">
+                            Uñas + Pestañas
+                        </span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-2xs text-oro font-bold uppercase tracking-widest">Uñas</span>
+                            <h3 class="text-xl font-luxury text-carbon mt-1">COMBO NAILS Y BEAUTY</h3>
+                            <p class="text-xs text-carbonlight mt-2 leading-relaxed">
+                                Quedaran enamorados de tus ojos, y querrán besar tus manos.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-arena/60 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-oro">$20.00</span>
+                            </div>
+                            <button onclick="bookPromo('Combo Manicura + pestañas ')"
+                                class="bg-carbon hover:bg-oro text-white px-4 py-2.5 rounded-full text-3xs font-semibold uppercase tracking-wider transition-all">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo 6 -->
+                <div
+                    class="promo-card filter-mirada bg-marfil border border-arena rounded-3xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="h-64 relative overflow-hidden bg-white">
+                        <img src="promo2.jpeg" alt="Uñas Acrílicas" class="w-full h-full object-cover"
+                            onerror="handleImgError(this, 'sparkles');">
+                        <span
+                            class="absolute top-4 right-4 bg-oro text-white px-3.5 py-1.5 rounded-full text-2xs font-bold tracking-wider uppercase">
+                            cautiva
+                        </span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-2xs text-oro font-bold uppercase tracking-widest">pestañas</span>
+                            <h3 class="text-xl font-luxury text-carbon mt-1">PROMO HENNA + PESTAÑAS</h3>
+                            <p class="text-xs text-carbonlight mt-2 leading-relaxed">
+                                Diseño de cejas con henna orgánica más un levantamiento de pestañas para una mirada
+                                cautivadora.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-arena/60 flex items-center justify-between">
+                            <div>
+
+                                <span class="text-lg font-bold text-oro">$20.00</span>
+                            </div>
+                            <button onclick="bookPromo('Promo Henna + Pestañas')"
+                                class="bg-carbon hover:bg-oro text-white px-4 py-2.5 rounded-full text-3xs font-semibold uppercase tracking-wider transition-all">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo 7 -->
+                <div
+                    class="promo-card filter-mirada bg-marfil border border-arena rounded-3xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="h-64 relative overflow-hidden bg-white">
+                        <img src="promo1.jpeg" alt="Combo Semipermanente" class="w-full h-full object-cover"
+                            onerror="handleImgError(this, 'flower');">
+                        <span
+                            class="absolute top-4 right-4 bg-oro text-white px-3.5 py-1.5 rounded-full text-2xs font-bold tracking-wider uppercase">
+                            colageno
+                        </span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-2xs text-oro font-bold uppercase tracking-widest">pestañas</span>
+                            <h3 class="text-xl font-luxury text-carbon mt-1">COMBO LIFTING Y LAMINADO</h3>
+                            <p class="text-xs text-carbonlight mt-2 leading-relaxed">
+                                Levantamiento de pestañas para un efecto rímel más un laminado de cejas para un look
+                                pulido y natural.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-arena/60 flex items-center justify-between">
+                            <div>
+
+                                <span class="text-lg font-bold text-oro">$20.00</span>
+                            </div>
+                            <button onclick="bookPromo('Combo Lifting y Laminado')"
+                                class="bg-carbon hover:bg-oro text-white px-4 py-2.5 rounded-full text-3xs font-semibold uppercase tracking-wider transition-all">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- === CATEGORÍA: MIRADA Y ROSTRO (3 PROMOS) === -->
+                <!-- Promo 8 -->
+                <div
+                    class="promo-card filter-mirada filter-unas bg-marfil border border-arena rounded-3xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="h-64 relative overflow-hidden bg-white">
+                        <img src="promo3.jpeg" alt="Lifting y Cejas" class="w-full h-full object-cover"
+                            onerror="handleImgError(this, 'eye');">
+                        <span
+                            class="absolute top-4 right-4 bg-oro text-white px-3.5 py-1.5 rounded-full text-2xs font-bold tracking-wider uppercase">
+                            perfecta
+                        </span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-2xs text-oro font-bold uppercase tracking-widest">uñas y pestañas</span>
+                            <h3 class="text-xl font-luxury text-carbon mt-1">COMBO NAILS Y LASHES</h3>
+                            <p class="text-xs text-carbonlight mt-2 leading-relaxed">
+                                Tus uñas en rubber gel y pestañas de seda resaltaran.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-arena/60 flex items-center justify-between">
+                            <div>
+
+                                <span class="text-lg font-bold text-oro">$20.00</span>
+                            </div>
+                            <button onclick="bookPromo('Promo Combo Nails y Lashes')"
+                                class="bg-carbon hover:bg-oro text-white px-4 py-2.5 rounded-full text-3xs font-semibold uppercase tracking-wider transition-all">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo 9 -->
+                <div
+                    class="promo-card filter-mirada filter-unas bg-marfil border border-arena rounded-3xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="h-64 relative overflow-hidden bg-white">
+                        <img src="P4.jpeg" alt="Facial Profundo" class="w-full h-full object-cover"
+                            onerror="handleImgError(this, 'flower');">
+                        <span
+                            class="absolute top-4 right-4 bg-oro text-white px-3.5 py-1.5 rounded-full text-2xs font-bold tracking-wider uppercase">
+                            combos
+                        </span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-2xs text-oro font-bold uppercase tracking-widest">pestañas</span>
+                            <h3 class="text-xl font-luxury text-carbon mt-1">COMBO ENCANTADORA/BELLEZA TOTAL</h3>
+                            <p class="text-xs text-carbonlight mt-2 leading-relaxed">
+                                pregunta por nuesto combo encantadora o belleza total, diseño de cejas, pestañas y uñas
+                                para una transformación completa.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-arena/60 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-oro">c/u $20.00</span>
+                            </div>
+                            <button onclick="bookPromo('Combo Encantadora/Belleza Total')"
+                                class="bg-carbon hover:bg-oro text-white px-4 py-2.5 rounded-full text-3xs font-semibold uppercase tracking-wider transition-all">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo 10 -->
+                <div
+                    class="promo-card filter-mirada bg-marfil border border-arena rounded-3xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="h-64 relative overflow-hidden bg-white">
+                        <img src="P6.jpeg" alt="Combo" class="w-full h-full object-cover"
+                            onerror="handleImgError(this, 'sparkles');">
+                        <span
+                            class="absolute top-4 right-4 bg-oro text-white px-3.5 py-1.5 rounded-full text-2xs font-bold tracking-wider uppercase">
+                            combos
+                        </span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-2xs text-oro font-bold uppercase tracking-widest">Mirada</span>
+                            <h3 class="text-xl font-luxury text-carbon mt-1">COMBO GUAPISIMA/SEDUCTORA</h3>
+                            <p class="text-xs text-carbonlight mt-2 leading-relaxed">
+                                pregunta por nuestro combo guapisima o seductora, que incluye hidratacion de labios.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-arena/60 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-oro">c/u $20.00</span>
+                            </div>
+                            <button onclick="bookPromo('Combo Guapisima/Seductora')"
+                                class="bg-carbon hover:bg-oro text-white px-4 py-2.5 rounded-full text-3xs font-semibold uppercase tracking-wider transition-all">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Promo 11 -->
+                <div
+                    class="promo-card filter-cabello bg-marfil border border-arena rounded-3xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="h-64 relative overflow-hidden bg-white">
+                        <img src="P5.jpeg" alt="Combo" class="w-full h-full object-cover"
+                            onerror="handleImgError(this, 'flower');">
+                        <span
+                            class="absolute top-4 right-4 bg-oro text-white px-3.5 py-1.5 rounded-full text-2xs font-bold tracking-wider uppercase">
+                            combos
+                        </span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-2xs text-oro font-bold uppercase tracking-widest">cabello</span>
+                            <h3 class="text-xl font-luxury text-carbon mt-1">COMBO DIVINA/EXCLUSIVA</h3>
+                            <p class="text-xs text-carbonlight mt-2 leading-relaxed">
+                                pregunta por nuesto combo divina o exclusiva, que incluye tratamiento de cabello y detox
+                                capilar.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-arena/60 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-oro">c/u $20.00</span>
+                            </div>
+                            <button onclick="bookPromo('Combo Divina/Exclusiva')"
+                                class="bg-carbon hover:bg-oro text-white px-4 py-2.5 rounded-full text-3xs font-semibold uppercase tracking-wider transition-all">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Promo 12 -->
+                <div
+                    class="promo-card filter-cabello bg-marfil border border-arena rounded-3xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="h-64 relative overflow-hidden bg-white">
+                        <img src="P7.jpeg" alt="Combo" class="w-full h-full object-cover"
+                            onerror="handleImgError(this, 'flower');">
+                        <span
+                            class="absolute top-4 right-4 bg-oro text-white px-3.5 py-1.5 rounded-full text-2xs font-bold tracking-wider uppercase">
+                            combos
+                        </span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-2xs text-oro font-bold uppercase tracking-widest">cabello</span>
+                            <h3 class="text-xl font-luxury text-carbon mt-1">COMBO MAQUILLAJE Y PEINADO</h3>
+                            <p class="text-xs text-carbonlight mt-2 leading-relaxed">
+                                pregunta por nuesto combo maquillaje y peinado, para una transformación completa.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-arena/60 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-oro">c/u $20.00</span>
+                            </div>
+                            <button onclick="bookPromo('Combo Maquillaje y Peinado')"
+                                class="bg-carbon hover:bg-oro text-white px-4 py-2.5 rounded-full text-3xs font-semibold uppercase tracking-wider transition-all">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Promo 13 -->
+                <div
+                    class="promo-card filter-cabello bg-marfil border border-arena rounded-3xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="h-64 relative overflow-hidden bg-white">
+                        <img src="P8.jpeg" alt="Facial Profundo" class="w-full h-full object-cover"
+                            onerror="handleImgError(this, 'flower');">
+                        <span
+                            class="absolute top-4 right-4 bg-oro text-white px-3.5 py-1.5 rounded-full text-2xs font-bold tracking-wider uppercase">
+                            combos
+                        </span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-2xs text-oro font-bold uppercase tracking-widest">cabello</span>
+                            <h3 class="text-xl font-luxury text-carbon mt-1">COMBO BALAYAGE Y DISEÑO DE COLOR</h3>
+                            <p class="text-xs text-carbonlight mt-2 leading-relaxed">
+                                pregunta por nuesto combo balayage y diseño de color, para una transformación completa.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-arena/60 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-oro">$50.00</span>
+                            </div>
+                            <button onclick="bookPromo('Combo Balayage y Diseño de Color')"
+                                class="bg-carbon hover:bg-oro text-white px-4 py-2.5 rounded-full text-3xs font-semibold uppercase tracking-wider transition-all">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN AGENDAR CITA -->
+    <section id="agendar" class="py-24 bg-arena/20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+
+                <!-- Columna de Información -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div class="space-y-4">
+                        <span class="text-oro font-semibold tracking-widest uppercase text-xs">Pide tu turno</span>
+                        <h2 class="text-3xl md:text-4xl font-luxury text-carbon">Agenda tu Experiencia</h2>
+                        <div class="w-16 h-0.5 bg-oro mt-4"></div>
+                        <p class="text-carbonlight text-sm leading-relaxed">
+                            Reserva de manera fácil y rápida completando el formulario. Tu bienestar está a solo unos
+                            clics de distancia.
+                        </p>
+                    </div>
+
+                    <!-- Mensajes de WhatsApp y Atención Directa -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-arena space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-green-50 text-green-600 p-3 rounded-full flex-shrink-0">
+                                <i data-lucide="message-square" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-carbon text-sm">Reserva con Confianza</h4>
+                                <p class="text-xs text-carbonlight mt-1">
+                                    Recibirás la confirmación por WhatsApp en menos de 1 hora una vez verifiquemos tu
+                                    espacio solicitado.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-arena pt-6 flex items-start gap-4">
+                            <div class="bg-oro/10 text-oro p-3 rounded-full flex-shrink-0">
+                                <i data-lucide="phone" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-carbon text-sm">¿Prefieres Llamar Directo?</h4>
+                                <p class="text-xs text-carbonlight mt-1">
+                                    Estamos disponibles de Lunes a Sábado, 9:00 – 19:00.
+                                </p>
+                                <a href="https://api.whatsapp.com/send?phone=593978959508" target="_blank"
+                                    class="text-oro font-bold text-sm block mt-2 hover:underline">
+                                    097 895 9508
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario de Agendamiento -->
+                <div class="lg:col-span-7 bg-white p-8 md:p-10 rounded-3xl shadow-md border border-arena">
+                    <form id="booking-form" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Nombre -->
+                            <div>
+                                <label for="fullname"
+                                    class="block text-xs font-semibold text-carbon uppercase tracking-wider mb-2">Nombres
+                                    Completos</label>
+                                <input type="text" id="fullname" required placeholder="Ej: Valentina Mendoza"
+                                    class="w-full px-4 py-3 rounded-xl bg-marfil border border-arena focus:border-oro focus:ring-1 focus:ring-oro outline-none text-sm transition-all text-carbon">
+                            </div>
+
+                            <!-- Teléfono -->
+                            <div>
+                                <label for="phone"
+                                    class="block text-xs font-semibold text-carbon uppercase tracking-wider mb-2">Teléfono
+                                    Celular</label>
+                                <input type="tel" id="phone" required placeholder="Ej: 0978959508"
+                                    class="w-full px-4 py-3 rounded-xl bg-marfil border border-arena focus:border-oro focus:ring-1 focus:ring-oro outline-none text-sm transition-all text-carbon">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Servicio Deseado -->
+                            <div>
+                                <label for="service"
+                                    class="block text-xs font-semibold text-carbon uppercase tracking-wider mb-2">Servicio
+                                    Deseado</label>
+                                <select id="service" required
+                                    class="w-full px-4 py-3 rounded-xl bg-marfil border border-arena focus:border-oro focus:ring-1 focus:ring-oro outline-none text-sm transition-all text-carbonlight appearance-none">
+                                    <option value="" disabled selected>Selecciona un servicio</option>
+
+                                    <!-- Servicios Reales -->
+                                    <optgroup label="Servicios Regulares">
+                                        <option value="Alisado Orgánico">Alisado Orgánico (Cabello)</option>
+                                        <option value="Botox Capilar">Botox Capilar(Cabello)</option>
+                                        <option value="Balayage">Balayage (Cabello)</option>
+                                        <option value="Coloración">Coloración (Cabello)</option>
+                                        <option value="Corte">Corte (Cabello)</option>
+                                        <option value="Keratina">Keratina (Cabello)</option>
+                                        <option value="Hidratación">Hidratación (Cabello)</option>
+                                        <option value="Tratamiento Capilar">Tratamiento Capilar (Cabello)</option>
+                                        <option value="Soft Gel">Soft Gel (Uñas)</option>
+                                        <option value="Rubber Gel">Rubber Gel (Uñas)</option>
+                                        <option value="Builder Gel">Builder Gel (Uñas)</option>
+                                        <option value="Gelish">Gelish (Uñas)</option>
+                                        <option value="Polygel">Polygel (Uñas)</option>
+                                        <option value="Acrílicas">Acrílicas (Uñas)</option>
+                                        <option value="Esculpidas">Esculpidas (Uñas)</option>
+                                        <option value="Kapping">Kapping (Uñas)</option>
+                                        <option value="Pedicure Spa">Pedicure Spa (Pedicure)</option>
+                                        <option value="Pedicure Tradicional">Pedicure Tradicional (Pedicure)</option>
+                                        <option value="Jelly Spa">Jelly Spa (Pedicure)</option>
+                                        <option value="Gel en pies">Gel en pies (Pedicure)</option>
+                                        <option value="Clásicas">Clásicas (Pestañas)</option>
+                                        <option value="Híbridas">Híbridas (Pestañas)</option>
+                                        <option value="Volumen Griego">Volumen Griego (Pestañas)</option>
+                                        <option value="Volumen Ruso">Volumen Ruso (Pestañas)</option>
+                                        <option value="Efecto Rímel">Efecto Rímel (Pestañas)</option>
+                                        <option value="Perfilado">Perfilado (Cejas)</option>
+                                        <option value="Diseño">Diseño (Cejas)</option>
+                                        <option value="Laminado">Laminado (Cejas)</option>
+                                        <option value="Pigmentación">Pigmentación (Cejas)</option>
+                                        <option value="Henna">Henna (Cejas)</option>
+                                    </optgroup>
+
+                                    <!-- Opciones de Promociones vinculadas al catálogo -->
+                                    <optgroup label="Promociones Especiales">
+                                        <option value="kerabotox">PROMO KERABOTOX b</option>
+                                        <option value="PROMO ANTIFRIZZ">PROMO ANTIFRIZZ</option>
+                                        <option value="PROMO CAPILAR">PROMO CAPILAR</option>
+                                        <option value="PROMO CORTES">PROMO CORTES</option>
+                                        <option value="COMBO NAILS Y BEAUTY">COMBO NAILS Y BEAUTY</option>
+                                        <option value="PROMO HENNA + PESTAÑAS ">PROMO HENNA + PESTAÑAS </option>
+                                        <option value="COMBO LIFTING Y LAMINADO">COMBO LIFTING Y LAMINADO</option>
+                                        <option value="COMBO NAILS Y LASHES">COMBO NAILS Y LASHES</option>
+                                        <option value="COMBO ENCANTADORA/BELLEZA TOTAL">COMBO ENCANTADORA/BELLEZA TOTAL
+                                        </option>
+                                        <option value="COMBO GUAPISIMA/SEDUCTORA">COMBO GUAPISIMA/SEDUCTORA</option>
+                                        <option value="COMBO DIVINA/EXCLUSIVA">COMBO DIVINA/EXCLUSIVA</option>
+                                        <option value="COMBO MAQUILLAJE Y PEINADO">COMBO MAQUILLAJE Y PEINADO</option>
+                                        <option value="COMBO BALAYAGE Y DISEÑO DE COLOR">COMBO BALAYAGE Y DISEÑO DE
+                                            COLOR</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <!-- Sede fija (Portoviejo) -->
+                            <div>
+                                <label
+                                    class="block text-xs font-semibold text-carbon uppercase tracking-wider mb-2">Sede /
+                                    Local</label>
+                                <input type="text" readonly value="Portoviejo (Centro Plaza)"
+                                    class="w-full px-4 py-3 rounded-xl bg-arena/30 border border-arena outline-none text-sm text-carbonlight font-medium cursor-not-allowed">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Fecha -->
+                            <div>
+                                <label for="date"
+                                    class="block text-xs font-semibold text-carbon uppercase tracking-wider mb-2">Fecha</label>
+                                <input type="date" id="date" required
+                                    class="w-full px-4 py-3 rounded-xl bg-marfil border border-arena focus:border-oro focus:ring-1 focus:ring-oro outline-none text-sm transition-all text-carbonlight">
+                            </div>
+
+                            <!-- Hora -->
+                            <div>
+                                <label for="time"
+                                    class="block text-xs font-semibold text-carbon uppercase tracking-wider mb-2">Hora</label>
+                                <input type="time" id="time" required
+                                    class="w-full px-4 py-3 rounded-xl bg-marfil border border-arena focus:border-oro focus:ring-1 focus:ring-oro outline-none text-sm transition-all text-carbonlight">
+                            </div>
+                        </div>
+
+                        <!-- Notas adicionales -->
+                        <div>
+                            <label for="notes"
+                                class="block text-xs font-semibold text-carbon uppercase tracking-wider mb-2">Notas
+                                Adicionales (Opcional)</label>
+                            <textarea id="notes" rows="3"
+                                placeholder="Si tienes alguna preferencia especial o alergias, escríbelas aquí..."
+                                class="w-full px-4 py-3 rounded-xl bg-marfil border border-arena focus:border-oro focus:ring-1 focus:ring-oro outline-none text-sm transition-all text-carbon resize-none"></textarea>
+                        </div>
+
+                        <!-- Botón de Envío -->
+                        <button type="submit"
+                            class="w-full bg-oro hover:bg-carbon text-white py-4 rounded-xl text-xs font-semibold tracking-widest uppercase transition-all duration-300 shadow-md flex items-center justify-center gap-2">
+                            <i data-lucide="check-circle2" class="w-4 h-4"></i> Consultar Disponibilidad
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN RESEÑAS -->
+    <section id="reseñas" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+
+                <!-- Izquierda: Formulario de Nueva Reseña -->
+                <div class="lg:col-span-5 space-y-6 bg-arena/30 p-8 rounded-3xl border border-arena">
+                    <div class="space-y-2">
+                        <span class="text-oro font-semibold tracking-widest uppercase text-xs">Cuéntanos tu
+                            experiencia</span>
+                        <h2 class="text-2xl md:text-3xl font-luxury text-carbon">Déjanos tu Reseña</h2>
+                        <p class="text-xs text-carbonlight leading-relaxed">
+                            Tu opinión nos impulsa a seguir mejorando. No requiere registrarse ni iniciar sesión,
+                            ¡comenta libremente!
+                        </p>
+                    </div>
+
+                    <form id="review-form" class="space-y-4">
+                        <!-- Nombre -->
+                        <div>
+                            <label for="rev-name"
+                                class="block text-2xs font-semibold text-carbon uppercase tracking-wider mb-1">Tu
+                                Nombre</label>
+                            <input type="text" id="rev-name" required placeholder="Ej: Ma. Fernanda S."
+                                class="w-full px-4 py-2.5 rounded-xl bg-white border border-arena focus:border-oro focus:ring-1 focus:ring-oro outline-none text-xs text-carbon">
+                        </div>
+
+                        <!-- Selección Estrellas -->
+                        <div>
+                            <label class="block text-2xs font-semibold text-carbon uppercase tracking-wider mb-2">Tu
+                                Calificación</label>
+                            <div class="flex gap-2" id="stars-selector">
+                                <button type="button" data-rating="1"
+                                    class="star-btn text-gray-300 hover:text-oro transition-colors"><i
+                                        data-lucide="star" class="w-6 h-6 fill-current"></i></button>
+                                <button type="button" data-rating="2"
+                                    class="star-btn text-gray-300 hover:text-oro transition-colors"><i
+                                        data-lucide="star" class="w-6 h-6 fill-current"></i></button>
+                                <button type="button" data-rating="3"
+                                    class="star-btn text-gray-300 hover:text-oro transition-colors"><i
+                                        data-lucide="star" class="w-6 h-6 fill-current"></i></button>
+                                <button type="button" data-rating="4"
+                                    class="star-btn text-gray-300 hover:text-oro transition-colors"><i
+                                        data-lucide="star" class="w-6 h-6 fill-current"></i></button>
+                                <button type="button" data-rating="5" class="star-btn text-oro transition-colors"><i
+                                        data-lucide="star" class="w-6 h-6 fill-current"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Comentario -->
+                        <div>
+                            <label for="rev-comment"
+                                class="block text-2xs font-semibold text-carbon uppercase tracking-wider mb-1">Comentario</label>
+                            <textarea id="rev-comment" required rows="3"
+                                placeholder="Me encantó el servicio y la atención de las chicas..."
+                                class="w-full px-4 py-2.5 rounded-xl bg-white border border-arena focus:border-oro focus:ring-1 focus:ring-oro outline-none text-xs text-carbon resize-none"></textarea>
+                        </div>
+
+                        <!-- Botón enviar -->
+                        <button type="submit"
+                            class="w-full bg-carbon hover:bg-oro text-white py-3 rounded-xl text-2xs font-semibold tracking-widest uppercase transition-colors">
+                            Publicar Reseña
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Derecha: Listado de Reseñas -->
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="space-y-2">
+                        <span class="text-oro font-semibold tracking-widest uppercase text-xs">Lo que dicen de
+                            nosotros</span>
+                        <h2 class="text-3xl font-luxury text-carbon">Opiniones de Clientes</h2>
+                        <div class="w-16 h-0.5 bg-oro mt-3"></div>
+                    </div>
+
+                    <!-- Contenedor dinámico de Reseñas -->
+                    <div id="reviews-container" class="space-y-6 max-h-[500px] overflow-y-auto pr-2 space-y-4">
+                        <!-- Las reseñas dinámicas se cargarán aquí por JS -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN UBÍCANOS -->
+    <section id="ubicacion" class="py-24 bg-arena/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-oro font-semibold tracking-widest uppercase text-xs">Visítanos hoy mismo</span>
+                <h2 class="text-3xl md:text-4xl font-luxury text-carbon">Nuestra Ubicación en Portoviejo</h2>
+                <div class="w-16 h-0.5 bg-oro mx-auto mt-4"></div>
+                <p class="text-carbonlight text-sm">
+                    Disfruta de la mejor experiencia de salón en nuestras instalaciones exclusivas.
+                </p>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <div
+                    class="bg-white rounded-3xl p-8 shadow-sm border border-arena flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-2 text-oro">
+                            <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            <h3 class="text-2xl font-luxury text-carbon font-semibold">Sede Portoviejo (Centro Plaza)
+                            </h3>
+                        </div>
+                        <p class="text-sm text-carbonlight leading-relaxed">
+                            Calle 10 de Agosto y Avenida Ricaurte, Centro Plaza, Portoviejo, Manabí, Ecuador.
+                        </p>
+                        <div class="text-xs text-carbonlight space-y-1 pt-2">
+                            <p><strong>Teléfono / WhatsApp:</strong> 097 895 9508</p>
+                            <p><strong>Horario:</strong> Lunes a Sábado: 9:00 AM - 7:00 PM</p>
+                        </div>
+                    </div>
+
+                    <!-- Enlace directo y mapa simulado -->
+                    <a href="https://maps.app.goo.gl/tfPPKqBatwR8u4EE7?g_st=ac" target="_blank"
+                        class="group h-56 bg-arena rounded-2xl relative overflow-hidden flex items-center justify-center border border-arena shadow-inner block">
+                        <div class="absolute inset-0 bg-neutral-100 opacity-60"></div>
+                        <div class="absolute w-full h-0.5 bg-neutral-300 top-1/2"></div>
+                        <div class="absolute h-full w-0.5 bg-neutral-300 left-1/3"></div>
+                        <div class="absolute h-full w-0.5 bg-neutral-300 left-2/3"></div>
+                        <div class="relative z-10 flex flex-col items-center space-y-2">
+                            <div
+                                class="bg-oro text-white p-3.5 rounded-full shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <span
+                                class="text-xs font-bold uppercase tracking-wider text-carbon bg-white px-3 py-1.5 rounded-lg shadow">Ver
+                                en Google Maps</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (PIE DE PÁGINA) -->
+    <footer class="bg-carbon text-arena/90 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
+
+            <!-- Info principal -->
+            <div class="space-y-4">
+                <img src="logo.jpeg" alt="GUAPAS"
+                    class="h-14 w-auto object-contain bg-white/10 p-1.5 rounded-lg border border-white/5"
+                    onerror="handleImgError(this, 'crown');">
+                <p class="text-xs text-arena/70 leading-relaxed pt-2">
+                    Tu oasis de belleza y relajación en Portoviejo. Expertas en destacar tu confianza y estilo natural
+                    de manera única.
+                </p>
+            </div>
+
+            <!-- Enlaces Rápidos -->
+            <div class="space-y-4">
+                <h4 class="font-semibold text-white text-sm tracking-wider uppercase">Explora</h4>
+                <ul class="space-y-2 text-xs text-arena/70">
+                    <li><a href="#inicio" class="hover:text-oro transition-colors">Inicio</a></li>
+                    <li><a href="#nosotros" class="hover:text-oro transition-colors">Nuestro Trabajo</a></li>
+                    <li><a href="#servicios" class="hover:text-oro transition-colors">Servicios</a></li>
+                    <li><a href="#promociones" class="hover:text-oro transition-colors">Promociones</a></li>
+                    <li><a href="#reseñas" class="hover:text-oro transition-colors">Reseñas</a></li>
+                </ul>
+            </div>
+
+            <!-- Horarios -->
+            <div class="space-y-4">
+                <h4 class="font-semibold text-white text-sm tracking-wider uppercase">Horarios</h4>
+                <ul class="space-y-2 text-xs text-arena/70 leading-relaxed">
+                    <li><strong>Lunes a Sábado:</strong> 9:00 AM - 7:00 PM</li>
+                    <li><strong>Domingos:</strong> Cerrado</li>
+                </ul>
+            </div>
+            <!-- Redes -->
+            <div class="space-y-4">
+                <h4 class="font-semibold text-white text-sm tracking-wider uppercase">Síguenos</h4>
+
+                <div class="flex gap-4">
+
+                    <a href="https://www.facebook.com/share/14fYSARjBna/" target="_blank"
+                        class="bg-arena/10 hover:bg-oro text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
+
+                        <i class="fa-brands fa-facebook-f"></i>
+
+                    </a>
+
+                    <a href="https://www.instagram.com/guapas_beauty_studio?igsh=MWdkc2p0ZWEyZmwwdg==" target="_blank"
+                        class="bg-arena/10 hover:bg-oro text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+                    <a href="https://www.tiktok.com/@guapas_beauty_studio?_r=1&_t=ZS-96juZ4Iztyq" target="_blank"
+                        class="bg-arena/10 hover:bg-oro text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
+
+                        <i class="fa-brands fa-tiktok"></i>
+
+                    </a>
+
+                </div>
+
+                <p class="text-2xs text-arena/50 pt-2">
+                    © 2026 GUAPAS. Todos los derechos reservados.
+                </p>
+            </div>
+    </footer>
+
+    <!-- SCRIPT DE INTERACCIONES DINÁMICAS -->
+    <script>
+        // Inicializar Iconos Lucide
+        lucide.createIcons();
+
+        // Control del Menú Móvil
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- FILTRADO DE SERVICIOS ---
+        function filterServices(category) {
+            const cards = document.querySelectorAll('.service-card');
+            const buttons = document.querySelectorAll('.service-filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-oro', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-white', 'text-carbon', 'border', 'border-arena', 'hover:bg-arena/40');
+            });
+
+            const activeBtn = document.getElementById(`sbtn-${category}`);
+            activeBtn.classList.remove('bg-white', 'text-carbon', 'border', 'border-arena', 'hover:bg-arena/40');
+            activeBtn.classList.add('bg-oro', 'text-white', 'shadow-sm');
+
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'flex';
+                } else {
+                    if (card.classList.contains(`filter-${category}`)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // --- FILTRADO DE PROMOCIONES ---
+        function filterPromos(category) {
+            const cards = document.querySelectorAll('.promo-card');
+            const buttons = document.querySelectorAll('.promo-filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-oro', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-arena/50', 'text-carbon', 'hover:bg-arena');
+            });
+
+            const activeBtn = document.getElementById(`btn-${category}`);
+            activeBtn.classList.remove('bg-arena/50', 'text-carbon', 'hover:bg-arena');
+            activeBtn.classList.add('bg-oro', 'text-white', 'shadow-sm');
+
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'flex';
+                } else {
+                    if (card.classList.contains(`filter-${category}`)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // --- SISTEMA DINÁMICO DE RESEÑAS (LOCAL STORAGE) ---
+        const defaultReviews = [];
+        function getReviews() {
+            const stored = localStorage.getItem('guapas_reviews');
+            if (!stored) {
+                localStorage.setItem('guapas_reviews', JSON.stringify(defaultReviews));
+                return defaultReviews;
+            }
+            return JSON.parse(stored);
+        }
+
+        function renderReviews() {
+            const reviews = getReviews();
+            reviews.sort((a, b) => b.timestamp - a.timestamp);
+            const container = document.getElementById('reviews-container');
+            container.innerHTML = '';
+            reviews.forEach(rev => {
+                let starsHTML = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= rev.rating) {
+                        starsHTML += `<i data-lucide="star" class="w-4 h-4 text-oro fill-current"></i>`;
+                    } else {
+                        starsHTML += `<i data-lucide="star" class="w-4 h-4 text-gray-200"></i>`;
+                    }
+                }
+
+                const card = document.createElement('div');
+                card.className = "p-6 bg-marfil border border-arena rounded-2xl space-y-3 transition-transform hover:translate-x-1 duration-300";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-luxury text-base text-carbon font-semibold">${rev.name}</h4>
+                        <span class="text-3xs text-carbonlight uppercase tracking-wider">
+                                ${rev.timestamp
+                        ? new Date(rev.timestamp).toLocaleString('es-EC', {
+                            day: '2-digit',
+                            month: 'long',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })
+                        : 'Reciente'
+                    }
+                        </span>
+                    </div>
+                    <div class="flex gap-1">
+                        ${starsHTML}
+                    </div>
+                    <p class="text-xs text-carbonlight leading-relaxed">${rev.comment}</p>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        let selectedRating = 5;
+        const starButtons = document.querySelectorAll('.star-btn');
+
+        starButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedRating = parseInt(btn.getAttribute('data-rating'));
+                starButtons.forEach(innerBtn => {
+                    const innerRating = parseInt(innerBtn.getAttribute('data-rating'));
+                    if (innerRating <= selectedRating) {
+                        innerBtn.classList.remove('text-gray-300');
+                        innerBtn.classList.add('text-oro');
+                    } else {
+                        innerBtn.classList.remove('text-oro');
+                        innerBtn.classList.add('text-gray-300');
+                    }
+                });
+            });
+        });
+
+        const reviewForm = document.getElementById('review-form');
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nameInput = document.getElementById('rev-name');
+            const commentInput = document.getElementById('rev-comment');
+
+            const newReview = {
+                name: nameInput.value,
+                rating: selectedRating,
+                comment: commentInput.value,
+                timestamp: Date.now()
+            };
+
+            const currentReviews = getReviews();
+            currentReviews.unshift(newReview);
+            localStorage.setItem('guapas_reviews', JSON.stringify(currentReviews));
+
+            nameInput.value = '';
+            commentInput.value = '';
+            selectedRating = 5;
+
+            renderReviews();
+        });
+
+       function bookPromo(promoName) {
+
+    const serviceSelect = document.getElementById('service');
+    if (serviceSelect) {
+        serviceSelect.value = promoName;
+    }
+
+    const agendarSection = document.getElementById('agendar');
+    if (agendarSection) {
+        agendarSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+        function bookService(serviceName) {
+            const serviceSelect = document.getElementById('service');
+            serviceSelect.value = serviceName;
+            document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- AGENDAMIENTO REAL VÍA WHATSAPP ---
+        const bookingForm = document.getElementById('booking-form');
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const fullname = document.getElementById('fullname').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const notes = document.getElementById('notes').value || "Ninguna";
+
+            const message = `¡Hola GUAPAS! Me gustaría consultar disponibilidad para una cita:\n\n` +
+                `🌸 *Nombre:* ${fullname}\n` +
+                `📞 *Teléfono:* ${phone}\n` +
+                `💅 *Servicio:* ${service}\n` +
+                `📍 *Sede:* Portoviejo (Centro Plaza)\n` +
+                `📅 *Fecha:* ${date}\n` +
+                `⏰ *Hora:* ${time}\n` +
+                `📝 *Notas:* ${notes}`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://api.whatsapp.com/send?phone=593978959508&text=${encodedMessage}`, '_blank');
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderReviews();
+        });
+    </script>
+    <script> const accordions = document.querySelectorAll(".accordion");
+
+        accordions.forEach(item => {
+
+            const btn = item.querySelector(".accordion-btn");
+
+            const content = item.querySelector(".accordion-content");
+
+            btn.addEventListener("click", () => {
+
+                const abierto = content.style.maxHeight;
+
+                document.querySelectorAll(".accordion-content").forEach(c => {
+
+                    c.style.maxHeight = null;
+
+                });
+
+                if (!abierto) {
+
+                    content.style.maxHeight = content.scrollHeight + "px";
+
+                }
+
+            });
+
+        }); </script>
+</body>
+
+</html>
